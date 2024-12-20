@@ -1,13 +1,32 @@
 #include "Parser.hpp"
 
 
+// string get_filename(int argc, char **argv)
+// {
+//     //call that functions from here and also check type is file from this get_filename function
+//     if (argc > 2)
+//         throw std::exception();
+//     if (argc < 2)
+//         return DEFAULT_FILENAME; 
+//     return argv[1];
+// }
+
+
 string get_filename(int argc, char **argv)
 {
-    if (argc > 2)
-        throw std::exception();
+    if (argc > 2) 
+        throw std::runtime_error("Too many arguments");
     if (argc < 2)
-        return DEFAULT_FILENAME; 
-    return argv[1];
+    {
+        std::string defaultPath = resolvePath(DEFAULT_FILENAME);
+        if (checkFileType(defaultPath.c_str()) != "regular file")
+            throw std::runtime_error("Default file is not a regular file");
+        return defaultPath;
+    }
+    std::string filePath = resolvePath(argv[1]);
+    if (checkFileType(filePath.c_str()) != "regular file") 
+        throw std::runtime_error("Provided path does not point to a regular file");
+    return filePath;
 }
 
 string pars_config(int argc, char **argv)

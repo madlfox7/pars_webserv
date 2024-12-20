@@ -9,11 +9,20 @@
 #include <cctype>
 #include <string>
 #include <stdexcept>
+#include <fstream>
+#include <cstdlib> 
+#include <cstring> 
+#include <sys/stat.h> 
 
 #define BUFFER_SIZE 1024
 #define DEFAULT_FILENAME "default_conf"
 
 using namespace std;
+
+//getting and checking file path 
+bool isAbsolutePath(const char* path);
+string resolvePath(const char* path);
+string checkFileType(const char* path);
 
 //getting content and cleaning up
 string get_filename(int argc, char **argv);
