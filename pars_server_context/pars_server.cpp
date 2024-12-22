@@ -12,7 +12,6 @@ string find_word_block(const string &content, const string &word, size_t &index)
     {
         index += word_length;
         skip_ws(content, index);
-
         if (index >= content.size() || content[index] != '{') 
             throw runtime_error("Expected '{' after the word: " + word);
         size_t block_start = ++index; 
@@ -38,13 +37,12 @@ string get_context(const string &content)
 {
     size_t index = 0;
     skip_ws(content, index);
-
     while (index < content.size())
     {
         if (content.compare(index, 6, "server") == 0)
         {
             string directive = find_word_block(content, "server", index);
-            if (!directive.empty()) 
+            if (!directive.empty())
                 ParseServerBlock(directive);
         } 
         else
@@ -58,10 +56,5 @@ string get_context(const string &content)
         skip_ws(content, index);
     }
     return content;
-}
-
-void ParseServerBlock(const string &block)
-{
-    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!Parsed server block!!!!!!!!!!!!!!!" << block << endl;
 }
 

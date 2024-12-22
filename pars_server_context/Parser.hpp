@@ -13,6 +13,7 @@
 #include <cstdlib> 
 #include <cstring> 
 #include <sys/stat.h> 
+#include <map>
 
 #define BUFFER_SIZE 1024
 #define DEFAULT_FILENAME "default_conf"
@@ -45,10 +46,22 @@ string remove_comments(const string &content);
 
 
 //starting server block parsing
-void ParseServerBlock(const string &block);
 void skip_ws(const string &content, size_t &index);
 string find_word_block(const string &content, const string &word, size_t &index);
 string get_context(const string &content);
+
+//directive handlers
+void extract_context(const string &block, size_t &index, const string &end_char, string &context) ;
+typedef void (*HandlerFunction)(const string&);
+void ParseServerBlock(const string &block);
+void handle_listen(const string &directive);
+void handle_server_name(const string &directive);
+void handle_root(const string &directive);
+void handle_proxy_pass(const string &directive);
+void handle_return(const string &directive);
+void handle_error_page(const string &directive);
+void handle_location(const string &directive);
+
 
 
 

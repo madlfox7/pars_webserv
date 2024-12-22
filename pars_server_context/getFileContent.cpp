@@ -3,7 +3,6 @@
 
 // string get_filename(int argc, char **argv)
 // {
-//     //call that functions from here and also check type is file from this get_filename function
 //     if (argc > 2)
 //         throw std::exception();
 //     if (argc < 2)

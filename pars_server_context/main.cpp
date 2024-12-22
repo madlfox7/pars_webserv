@@ -7,7 +7,7 @@ int main(int argc, char **argv)
     try
     {
         string content = pars_config(argc, argv);
-        cout << "Parsed content: " << content << endl;
+       // cout << "Parsed content: " << content << endl;
     }
     catch (const std::exception &e)
     {
